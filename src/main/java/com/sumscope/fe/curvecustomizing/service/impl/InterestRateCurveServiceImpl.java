@@ -19,6 +19,7 @@ public class InterestRateCurveServiceImpl implements InterestRateService {
 
     @Autowired
     private InterestRateDAO interestRateDAO;
+
     @Override
     public void deleteInterestRateByUserId(String userId){
 
@@ -49,7 +50,7 @@ public class InterestRateCurveServiceImpl implements InterestRateService {
     }
     @Override
     public void deleteByCurveId(int id) {
-         interestRateDAO.deleteById(Math.toIntExact(id));
+         interestRateDAO.deleteById(id);
 
     }
     @Override

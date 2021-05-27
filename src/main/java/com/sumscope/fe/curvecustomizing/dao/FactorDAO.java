@@ -23,4 +23,5 @@ public interface FactorDAO extends JpaRepository<FactorDTO, Integer> {
     void deleteFactorByUserId(String userId);
 
 
+
 }

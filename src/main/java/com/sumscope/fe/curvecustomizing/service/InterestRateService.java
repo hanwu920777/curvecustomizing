@@ -11,8 +11,8 @@ public interface InterestRateService extends CurveService{
     void editInterestRateCurve(InterestRateDTO interestRateDTO);
     Page<InterestRateDTO> findAll(int page, int pageSize);
     void deleteInterestRateByUserId(String userId);
-//    void deleteInterestRateByUserId(String userId);
     InterestRateDTO findCurById(int id);
     List<InterestRateDTO> findAll();
     List<InterestRateDTO> findCurByUserId(String userId);
+
 }

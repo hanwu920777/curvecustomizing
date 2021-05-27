@@ -22,4 +22,6 @@ public interface InterestRateDAO extends JpaRepository<InterestRateDTO, Integer>
     @Transactional
     @Query("delete * from interestTable where userId= ?1")
     void deleteInterestRateByUserId(String userId);
+
+
 }

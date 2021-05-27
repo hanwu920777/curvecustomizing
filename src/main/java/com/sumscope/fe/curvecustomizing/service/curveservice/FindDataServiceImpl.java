@@ -1,4 +1,4 @@
-package com.sumscope.fe.curvecustomizing.service;
+package com.sumscope.fe.curvecustomizing.service.curveservice;
 
 import com.alibaba.fastjson.JSONArray;
 import com.sumscope.fe.curvecustomizing.entity.*;
@@ -14,11 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FindData {
+public class FindDataServiceImpl implements FindDataService {
     @Autowired
     InterestRateCurveServiceImpl interestRateCurveServiceImpl;
     @Autowired
     FactorCurveServiceImpl factorCurveServiceImpl;
+
+    @Override
     public List<CurveDataModelTo> findInterestRateData(String userId){
         List<InterestRateDTO> interestRateList = interestRateCurveServiceImpl.findCurByUserId(userId);
         List<CurveDataModelTo> result=new ArrayList<>();
@@ -28,7 +30,7 @@ public class FindData {
             String list = dto.getInterestRateAndFactorList();
             List<InterestRateAndFactorModelTo> interestRateModels = JSONArray.parseArray(list, InterestRateAndFactorModelTo.class);
 
-            LocalDate dateTime2 = LocalDate.parse(dto.getCurveDate(),  DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            LocalDate dateTime2 = LocalDate.parse(dto.getCurveDate(),  DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             BeanUtils.copyProperties(dto,curveDataModelTo);
             curveDataModelTo.setCurveDate(dateTime2);
             curveDataModelTo.setInterestRateAndFactorList(interestRateModels);
@@ -39,6 +41,8 @@ public class FindData {
 
         return result;
     }
+
+    @Override
     public List<CurveDataModelTo> findFactorData(String userId){
         List<FactorDTO> factorList = factorCurveServiceImpl.findCurByUserId(userId);
         List<CurveDataModelTo> result1=new ArrayList<>();
@@ -47,7 +51,7 @@ public class FindData {
             curveDataModelTo=new CurveDataModelTo();
             String interestRateList = dto.getInterestRateAndFactorList();
             List<InterestRateAndFactorModelTo> factorModels = JSONArray.parseArray(interestRateList, InterestRateAndFactorModelTo.class);
-            LocalDate dateTime = LocalDate.parse(dto.getCurveDate(), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            LocalDate dateTime = LocalDate.parse(dto.getCurveDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             BeanUtils.copyProperties(dto,curveDataModelTo);
             curveDataModelTo.setCurveDate(dateTime);

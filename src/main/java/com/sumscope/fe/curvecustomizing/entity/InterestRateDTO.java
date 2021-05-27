@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Component
-@Table(name="interestTable")
+@Table(name="interestRateTable")
 public class InterestRateDTO implements Serializable {
         private static final long serialVersionUID=12789L;
 
